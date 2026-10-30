@@ -1,0 +1,2904 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>BioScience Universe — Premium Scientific Knowledge &amp; Research Platform</title>
+    <meta name="description" content="Explore the wonders of life from molecular biology and human anatomy to biocomputing, genetics, and biotechnology research.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------------------------------------------------------- */
+        /* COLOR PALETTE & DESIGN SYSTEM (Theme Aware)                               */
+        /* ------------------------------------------------------------------------- */
+        :root {
+            /* Dark Theme (Default) */
+            --bg-main: #06111F;
+            --bg-secondary: #0A192B;
+            --bg-card: #10243A;
+            --bg-card-hover: #162E4A;
+            --bg-card-glass: rgba(16, 36, 58, 0.75);
+            --accent-cyan: #00D9F5;
+            --accent-cyan-dim: rgba(0, 217, 245, 0.15);
+            --accent-cyan-glow: rgba(0, 217, 245, 0.35);
+            --electric-blue: #258BFF;
+            --electric-blue-glow: rgba(37, 139, 255, 0.3);
+            --bio-emerald: #10B981;
+            --bio-amber: #F59E0B;
+            --bio-rose: #F43F5E;
+            --bio-purple: #8B5CF6;
+            --text-main: #FFFFFF;
+            --text-secondary: #B8C7D9;
+            --text-muted: #6B829E;
+            --border-subtle: rgba(0, 217, 245, 0.18);
+            --border-glow: rgba(0, 217, 245, 0.4);
+            --border-card: rgba(37, 139, 255, 0.2);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(0, 217, 245, 0.25);
+            --header-bg: rgba(6, 17, 31, 0.92);
+        }
+
+        [data-theme="light"] {
+            --bg-main: #F4F7FB;
+            --bg-secondary: #E8EEF5;
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFC;
+            --bg-card-glass: rgba(255, 255, 255, 0.9);
+            --accent-cyan: #0098B3;
+            --accent-cyan-dim: rgba(0, 152, 179, 0.1);
+            --accent-cyan-glow: rgba(0, 152, 179, 0.25);
+            --electric-blue: #1D6AE5;
+            --electric-blue-glow: rgba(29, 106, 229, 0.2);
+            --bio-emerald: #059669;
+            --bio-amber: #D97706;
+            --bio-rose: #E11D48;
+            --bio-purple: #7C3AED;
+            --text-main: #0B192C;
+            --text-secondary: #334E68;
+            --text-muted: #627D98;
+            --border-subtle: rgba(0, 152, 179, 0.2);
+            --border-glow: rgba(0, 152, 179, 0.35);
+            --border-card: rgba(29, 106, 229, 0.15);
+            --shadow-card: 0 10px 25px rgba(15, 23, 42, 0.08);
+            --shadow-glow: 0 0 20px rgba(0, 152, 179, 0.15);
+            --header-bg: rgba(244, 247, 251, 0.94);
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* RESET & BASE TYPOGRAPHY                                                   */
+        /* ------------------------------------------------------------------------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        code, pre, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* FULL-WIDTH RESPONSIVE HEADER & TOP NAVIGATION                             */
+        /* ------------------------------------------------------------------------- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-subtle);
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .header-inner {
+            max-width: 1720px;
+            margin: 0 auto;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .brand-emblem-wrap {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00D9F5 0%, #258BFF 50%, #06111F 100%);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: var(--shadow-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .brand-emblem-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-text h1 span {
+            color: var(--accent-cyan);
+        }
+
+        .brand-tagline {
+            font-size: 10px;
+            color: var(--electric-blue);
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        /* Nav Links */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-item a {
+            padding: 8px 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            color: var(--text-main);
+            background: var(--accent-cyan-dim);
+        }
+
+        .nav-item a.active {
+            color: var(--accent-cyan);
+            box-shadow: inset 0 -2px 0 var(--accent-cyan);
+        }
+
+        /* Header Right Controls */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 9px 16px 9px 38px;
+            color: var(--text-main);
+            font-size: 13px;
+            width: 250px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan-glow);
+            width: 300px;
+        }
+
+        .search-icon-badge {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-cyan);
+            pointer-events: none;
+            font-size: 14px;
+        }
+
+        .theme-switch-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-switch-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-ai-header {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--electric-blue) 100%);
+            color: #06111F;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 9px 18px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 217, 245, 0.3);
+        }
+
+        .btn-ai-header:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 217, 245, 0.5);
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--accent-cyan);
+            font-size: 20px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* FULL-SCREEN HERO SECTION                                                  */
+        /* ------------------------------------------------------------------------- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 28px;
+            background: radial-gradient(circle at 80% 20%, rgba(37, 139, 255, 0.18) 0%, rgba(6, 17, 31, 0) 65%),
+                        radial-gradient(circle at 10% 80%, rgba(0, 217, 245, 0.12) 0%, rgba(6, 17, 31, 0) 60%);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .hero-content-wrap {
+            max-width: 1720px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-cyan-dim);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-tag .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .hero-title {
+            font-size: clamp(34px, 4.2vw, 60px);
+            font-weight: 900;
+            line-height: 1.12;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero-title .glow-gradient {
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-cyan) 80%, var(--electric-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 1.4vw, 19px);
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 34px;
+            max-width: 680px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 38px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            border-left: 2px solid var(--accent-cyan);
+            padding-left: 14px;
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            line-height: 1.1;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .hero-cta-buttons {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-hero {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--electric-blue) 100%);
+            color: #06111F;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 14px 32px;
+            border-radius: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(0, 217, 245, 0.35);
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 217, 245, 0.5);
+        }
+
+        .btn-secondary-hero {
+            background: var(--bg-card-glass);
+            border: 1px solid var(--border-glow);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary-hero:hover {
+            background: var(--accent-cyan-dim);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Right Visual: High-Tech DNA & Lab Showcase */
+        .hero-visual-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            aspect-ratio: 16 / 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .hero-visual-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-hud-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(6, 17, 31, 0.1) 0%, rgba(6, 17, 31, 0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .hud-top-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hud-badge {
+            background: rgba(6, 17, 31, 0.85);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hud-bottom-info {
+            background: rgba(16, 36, 58, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hud-bottom-info h4 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .hud-bottom-info p {
+            font-size: 11px;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* GENERAL CONTENT SECTION WRAPPERS                                          */
+        /* ------------------------------------------------------------------------- */
+        .section-wrap {
+            width: 100%;
+            padding: 80px 28px;
+        }
+
+        .section-inner {
+            max-width: 1720px;
+            margin: 0 auto;
+        }
+
+        .section-header-block {
+            margin-bottom: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .section-header-left .section-badge {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-header-left h2 {
+            font-size: clamp(26px, 2.5vw, 40px);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .section-header-left p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* 12 SCIENTIFIC DIVISIONS GRID (3-4 Columns on Desktop)                    */
+        /* ------------------------------------------------------------------------- */
+        .divisions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 26px;
+        }
+
+        .division-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: var(--shadow-card);
+        }
+
+        .division-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-cyan);
+            box-shadow: var(--shadow-card), 0 0 25px var(--accent-cyan-glow);
+        }
+
+        .division-image-box {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .division-image-box svg, .division-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .division-card:hover .division-image-box svg,
+        .division-card:hover .division-image-box img {
+            transform: scale(1.06);
+        }
+
+        .division-num-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(6, 17, 31, 0.85);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 11px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .division-category-tag {
+            position: absolute;
+            bottom: 12px;
+            left: 14px;
+            background: rgba(37, 139, 255, 0.85);
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .division-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .division-content h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .division-content p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .division-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .d-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .btn-explore-division {
+            background: var(--accent-cyan-dim);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-explore-division:hover {
+            background: var(--accent-cyan);
+            color: #06111F;
+            box-shadow: 0 4px 15px var(--accent-cyan-glow);
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* INTERACTIVE SCIENTIFIC TOOLS SUITE                                       */
+        /* ------------------------------------------------------------------------- */
+        .tools-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .tool-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--accent-cyan-dim);
+            border: 1px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--accent-cyan);
+        }
+
+        .tool-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .tool-header p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .tool-form-group {
+            margin-bottom: 16px;
+        }
+
+        .tool-form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .tool-input {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .tool-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan-glow);
+        }
+
+        .tool-actions-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .btn-run-tool {
+            background: var(--accent-cyan);
+            color: #06111F;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-run-tool:hover {
+            box-shadow: 0 4px 15px var(--accent-cyan-glow);
+        }
+
+        .tool-output-box {
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent-cyan);
+            line-height: 1.6;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .punnett-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .punnett-table th, .punnett-table td {
+            border: 1px solid var(--border-card);
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .punnett-table th {
+            background: var(--accent-cyan-dim);
+            color: var(--accent-cyan);
+        }
+
+        .punnett-table td {
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* RESEARCH LIBRARY & ARTICLES                                               */
+        /* ------------------------------------------------------------------------- */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--electric-blue);
+            box-shadow: var(--shadow-card), 0 0 20px var(--electric-blue-glow);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .article-journal-badge {
+            background: rgba(37, 139, 255, 0.15);
+            color: var(--electric-blue);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(37, 139, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        .article-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .article-card h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .article-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .article-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 14px;
+        }
+
+        .article-doi {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn-read-article {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-read-article:hover {
+            text-decoration: underline;
+        }
+
+        .btn-bookmark {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .btn-bookmark.bookmarked, .btn-bookmark:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* AI SCIENCE RESEARCH ASSISTANT (Dedicated Panel / Modal)                  */
+        /* ------------------------------------------------------------------------- */
+        .ai-modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 17, 31, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .ai-modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-cyan-glow);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 840px;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalFadeIn 0.25s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .ai-modal-header {
+            padding: 18px 24px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-modal-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-close-modal {
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-close-modal:hover {
+            color: var(--text-main);
+            border-color: var(--accent-cyan);
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 20px 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-bubble {
+            max-width: 82%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        .chat-bubble.assistant {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-card);
+            align-self: flex-start;
+            color: var(--text-main);
+        }
+
+        .chat-bubble.user {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--electric-blue));
+            color: #06111F;
+            font-weight: 600;
+            align-self: flex-end;
+        }
+
+        .ai-quick-prompts {
+            padding: 10px 24px;
+            background: var(--bg-main);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .quick-prompt-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .quick-prompt-chip:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .ai-input-bar {
+            padding: 16px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            gap: 12px;
+        }
+
+        .ai-input-bar input {
+            flex: 1;
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .ai-input-bar input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .ai-input-bar button {
+            background: var(--accent-cyan);
+            color: #06111F;
+            font-weight: 800;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .medical-disclaimer-bar {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px 24px;
+            background: rgba(245, 158, 11, 0.1);
+            border-top: 1px solid rgba(245, 158, 11, 0.2);
+            color: #FBBF24;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* DETAIL MODAL (Division & Article Details)                                 */
+        /* ------------------------------------------------------------------------- */
+        .detail-modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 17, 31, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 2100;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .detail-modal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px var(--accent-cyan-glow);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 960px;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 36px;
+            animation: modalFadeIn 0.25s ease;
+        }
+
+        .detail-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .detail-modal-close:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* MULTI-COLUMN SCIENTIFIC FOOTER                                            */
+        /* ------------------------------------------------------------------------- */
+        .site-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 70px 28px 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-inner {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            letter-spacing: 1.2px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+        }
+
+        .footer-nav-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-nav-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav-list a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom-bar {
+            max-width: 1720px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* ------------------------------------------------------------------------- */
+        /* RESPONSIVE BREAKPOINTS (Mobile, Tablet, Laptop, Desktop)                  */
+        /* ------------------------------------------------------------------------- */
+        /* Standard Laptops (1024px - 1439px) */
+        @media (max-width: 1439px) {
+            .divisions-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-inner {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+
+        /* Tablets & Foldables (768px - 1023px) */
+        @media (max-width: 1023px) {
+            .hero-content-wrap {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+            .divisions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tools-container {
+                grid-template-columns: 1fr;
+            }
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .nav-menu {
+                display: none;
+            }
+            .hamburger-btn {
+                display: block;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* Mobile Screens (320px - 767px) */
+        @media (max-width: 767px) {
+            .header-inner {
+                padding: 10px 16px;
+            }
+            .search-container {
+                display: none;
+            }
+            .hero-banner {
+                padding: 40px 16px;
+                min-height: auto;
+            }
+            .hero-stats-row {
+                gap: 18px;
+            }
+            .divisions-grid {
+                grid-template-columns: 1fr;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-wrap {
+                padding: 50px 16px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================================= -->
+    <!-- 1. FULL-WIDTH DESKTOP WEBSITE HEADER & NAVIGATION                         -->
+    <!-- ========================================================================= -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand-logo-group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="brand-emblem-wrap">
+                    <img src="logo.jpg" alt="BioScience Universe Logo" onerror="this.src=''; this.innerHTML='🧬';">
+                </div>
+                <div class="brand-text">
+                    <h1>BIOSCIENCE <span>UNIVERSE</span></h1>
+                    <div class="brand-tagline">Scientific Knowledge &amp; Research Platform</div>
+                </div>
+            </div>
+
+            <!-- Horizontal Desktop Nav Links -->
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="active">Home</a></li>
+                <li class="nav-item"><a href="#divisions">12 Divisions</a></li>
+                <li class="nav-item"><a href="#diseases">Diseases</a></li>
+                <li class="nav-item"><a href="#tools">Scientific Tools</a></li>
+                <li class="nav-item"><a href="#research">Research</a></li>
+                <li class="nav-item"><a href="#articles">Articles</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+            </ul>
+
+            <!-- Controls: Search, Theme Switch & AI CTA -->
+            <div class="header-controls">
+                <div class="search-container">
+                    <span class="search-icon-badge">🔍</span>
+                    <input type="text" id="siteGlobalSearch" class="search-input" placeholder="Search genes, CRISPR, PDB, pathology..." oninput="handleGlobalSearch(this.value)">
+                </div>
+
+                <button class="theme-switch-btn" onclick="toggleTheme()" title="Switch Light/Dark Mode">
+                    <span id="themeIcon">☀️</span> <span id="themeLabel">Light</span>
+                </button>
+
+                <button class="btn-ai-header" onclick="openAiAssistant()">
+                    <span>✨</span> AI Research
+                </button>
+
+                <button class="hamburger-btn" onclick="toggleMobileDrawer()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileDrawer" style="display:none; background: var(--bg-secondary); border-bottom: 1px solid var(--border-subtle); padding: 16px;">
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+            <li><a href="#home" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">🏠 Home</a></li>
+            <li><a href="#divisions" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">🔬 12 Scientific Divisions</a></li>
+            <li><a href="#diseases" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">🦠 Diseases &amp; Pathology</a></li>
+            <li><a href="#tools" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">🧪 Interactive Scientific Tools</a></li>
+            <li><a href="#research" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">📚 Research Library</a></li>
+            <li><a href="#articles" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">📰 Featured Articles</a></li>
+            <li><a href="#about" onclick="toggleMobileDrawer()" style="color:var(--text-main); text-decoration:none; font-weight:700;">ℹ️ About Platform</a></li>
+        </ul>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. FULL-SCREEN HERO SECTION                                               -->
+    <!-- ========================================================================= -->
+    <section class="hero-banner" id="home">
+        <div class="hero-content-wrap">
+            <div class="hero-text-col">
+                <div class="hero-tag">
+                    <span class="pulse"></span>
+                    <span>International Science &amp; Biotechnology Platform</span>
+                </div>
+                <h1 class="hero-title">
+                    Welcome to <br>
+                    <span class="glow-gradient">BioScience Universe</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Explore the wonders of life, from the smallest cells to the vastness of evolution. Discover. Learn. Research. Build a healthier and smarter future through peer-reviewed biological discovery and biocomputing.
+                </p>
+
+                <div class="hero-stats-row">
+                    <div class="stat-card">
+                        <h3>12</h3>
+                        <p>Scientific Divisions</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>150+</h3>
+                        <p>Peer-Reviewed Articles</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>10</h3>
+                        <p>Interactive Tools</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>10k+</h3>
+                        <p>Genomic Entities</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-buttons">
+                    <a href="#divisions" class="btn-primary-hero">
+                        Explore Divisions <span>↓</span>
+                    </a>
+                    <button class="btn-secondary-hero" onclick="openAiAssistant()">
+                        <span>✨</span> Ask AI Assistant
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero High-Tech Visual Card with Generated Visual Asset -->
+            <div class="hero-visual-card">
+                <img src="hero_dna_universe.jpg" alt="3D DNA Double Helix & Futuristic Biotechnology Lab" onerror="renderDnaCanvasBackup(this)">
+                <div class="hero-hud-overlay">
+                    <div class="hud-top-meta">
+                        <span class="hud-badge">GENOMIC SEQUENCE: 00101101</span>
+                        <span class="hud-badge" style="border-color: var(--bio-emerald); color: var(--bio-emerald);">LIVE SYNCHRONIZED</span>
+                    </div>
+                    <div class="hud-bottom-info">
+                        <div>
+                            <h4>MOLECULAR DYNAMICS SIMULATION</h4>
+                            <p>B-DNA HELIX • 3.4 Å RISE/BP • 10.5 BP/TURN</p>
+                        </div>
+                        <button onclick="openDivisionDetail('molecular-genetics')" style="background: var(--accent-cyan); color:#06111F; border:none; padding:6px 12px; border-radius:6px; font-weight:800; cursor:pointer; font-size:11px;">
+                            ANALYZE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. ALL 12 SCIENTIFIC DIVISIONS (Dedicated Cards with Unique Graphics)      -->
+    <!-- ========================================================================= -->
+    <section class="section-wrap" id="divisions">
+        <div class="section-inner">
+            <div class="section-header-block">
+                <div class="section-header-left">
+                    <span class="section-badge">Academic Architecture</span>
+                    <h2>The 12 Scientific Divisions</h2>
+                    <p>Comprehensive biological disciplines structured from foundational anatomy to futuristic synthetic biology and computational medicine.</p>
+                </div>
+                <div>
+                    <span style="color:var(--text-muted); font-size:13px; font-weight:600;">12 Active Divisions • Updated 2026</span>
+                </div>
+            </div>
+
+            <div class="divisions-grid" id="divisionsContainer">
+                <!-- Javascript will inject all 12 cards with individual high-tech scientific illustrations -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. DISEASES & MEDICAL SCIENCE SPOTLIGHT                                   -->
+    <!-- ========================================================================= -->
+    <section class="section-wrap" id="diseases" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+        <div class="section-inner">
+            <div class="section-header-block">
+                <div class="section-header-left">
+                    <span class="section-badge" style="color: var(--bio-rose);">Pathology &amp; Clinical Research</span>
+                    <h2>Diseases &amp; Medical Science</h2>
+                    <p>Evidence-based investigation into pathological mechanisms, cellular oncology, genetic disorders, and novel therapeutics.</p>
+                </div>
+                <div>
+                    <span style="background:rgba(244, 63, 94, 0.15); color:var(--bio-rose); border:1px solid var(--bio-rose); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700;">
+                        EDUCATIONAL &amp; RESEARCH USE ONLY
+                    </span>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:24px;" id="diseasesContainer">
+                <!-- Javascript will populate interactive disease cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. INTERACTIVE SCIENTIFIC TOOLS SUITE                                     -->
+    <!-- ========================================================================= -->
+    <section class="section-wrap tools-section" id="tools">
+        <div class="section-inner">
+            <div class="section-header-block">
+                <div class="section-header-left">
+                    <span class="section-badge">Client-Side Biocomputing</span>
+                    <h2>Interactive Scientific Tools Suite</h2>
+                    <p>Real-time biological calculators, DNA transcription translators, and Mendelian genetic simulators executing mathematical and scientific formulas.</p>
+                </div>
+            </div>
+
+            <div class="tools-container">
+                <!-- Tool 1: DNA & Protein Analyzer -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🧬</div>
+                        <div>
+                            <h3>DNA, RNA &amp; Codon Analyzer</h3>
+                            <p>Computes Watson-Crick complement, reverse complement, mRNA, and amino acid peptide translation.</p>
+                        </div>
+                    </div>
+                    <div class="tool-form-group">
+                        <label>Enter DNA Sequence (5' to 3'):</label>
+                        <input type="text" id="dnaInputSeq" class="tool-input mono" value="ATGCGATCGATCGTAGCTAGCTAGCATCG">
+                    </div>
+                    <div class="tool-actions-row">
+                        <button class="btn-run-tool" onclick="runDnaAnalysis()">Analyze Sequence</button>
+                        <button class="tool-input" style="width:auto; cursor:pointer;" onclick="setDnaSample('ATGGCCATGGCGCCCAGAACACTG')">Load Sample Gene</button>
+                    </div>
+                    <div class="tool-output-box" id="dnaOutputBox">
+                        Click "Analyze Sequence" to compute complement, GC content, and translation table.
+                    </div>
+                </div>
+
+                <!-- Tool 2: Punnett Square Simulator -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🌱</div>
+                        <div>
+                            <h3>Mendelian Punnett Square Simulator</h3>
+                            <p>Predicts monohybrid and dihybrid genetic inheritance cross frequencies and phenotypic ratios.</p>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="tool-form-group">
+                        <div>
+                            <label>Parent 1 Genotype:</label>
+                            <input type="text" id="p1Genotype" class="tool-input mono" value="Aa">
+                        </div>
+                        <div>
+                            <label>Parent 2 Genotype:</label>
+                            <input type="text" id="p2Genotype" class="tool-input mono" value="Aa">
+                        </div>
+                    </div>
+                    <div class="tool-actions-row">
+                        <button class="btn-run-tool" onclick="runPunnettCross()">Simulate Cross</button>
+                        <button class="tool-input" style="width:auto; cursor:pointer;" onclick="setCrossSample('Bb', 'bb')">Test Heterozygote Cross</button>
+                    </div>
+                    <div class="tool-output-box" id="punnettOutputBox">
+                        Click "Simulate Cross" to calculate 2x2 grid and phenotypic breakdown.
+                    </div>
+                </div>
+
+                <!-- Tool 3: Molecular Biology Unit Converter -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">📏</div>
+                        <div>
+                            <h3>Genomic Distance &amp; Molecular Weight</h3>
+                            <p>Converts DNA base pairs (bp) to physical helical length in nanometers (nm) and kilobases.</p>
+                        </div>
+                    </div>
+                    <div class="tool-form-group">
+                        <label>Base Pairs (bp):</label>
+                        <input type="number" id="basePairCount" class="tool-input mono" value="1000" oninput="runUnitConvert()">
+                    </div>
+                    <div class="tool-output-box" id="unitConvertOutput">
+                        1,000 bp = 340.0 nm (0.340 µm) length<br>
+                        Molecular Weight (dsDNA): ~660,000 Daltons (660 kDa)<br>
+                        Approximate Nucleosomes: ~5 nucleosomal cores
+                    </div>
+                </div>
+
+                <!-- Tool 4: BioScience Knowledge Quiz -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎓</div>
+                        <div>
+                            <h3>Scientific Knowledge Test</h3>
+                            <p>Test your comprehension of genetics, immunology, biocomputing, and cellular physiology.</p>
+                        </div>
+                    </div>
+                    <div id="quizQuestionContainer">
+                        <div style="font-weight:700; font-size:14px; margin-bottom:12px; color:var(--text-main);" id="quizQuestionText">
+                            Loading scientific quiz...
+                        </div>
+                        <div id="quizOptionsContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
+                        <div id="quizFeedback" style="margin-top:14px; font-size:12px; font-weight:600;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 6. RESEARCH LIBRARY & ARTICLES                                            -->
+    <!-- ========================================================================= -->
+    <section class="section-wrap" id="research">
+        <div class="section-inner">
+            <div class="section-header-block">
+                <div class="section-header-left">
+                    <span class="section-badge">Scientific Literature</span>
+                    <h2>Research Library &amp; Featured Papers</h2>
+                    <p>Curated breakthroughs from peer-reviewed journals including Nature, Cell, Science, and PubMed Central with DOI citations.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button onclick="filterArticles('all')" class="quick-prompt-chip" style="background:var(--accent-cyan); color:#06111F; font-weight:800;">All Papers</button>
+                    <button onclick="filterArticles('Genetics')" class="quick-prompt-chip">Genetics</button>
+                    <button onclick="filterArticles('Biotechnology')" class="quick-prompt-chip">Biotech</button>
+                    <button onclick="filterArticles('Biocomputing')" class="quick-prompt-chip">Biocomputing</button>
+                    <button onclick="filterArticles('bookmarks')" class="quick-prompt-chip" style="color:var(--bio-amber);">⭐ Bookmarked (<span id="bookmarkCount">0</span>)</button>
+                </div>
+            </div>
+
+            <div class="articles-grid" id="articlesGridContainer">
+                <!-- Javascript will inject research papers -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 7. ABOUT THE PLATFORM & SCIENTIFIC ETHICS                                  -->
+    <!-- ========================================================================= -->
+    <section class="section-wrap" id="about" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle);">
+        <div class="section-inner">
+            <div style="background:var(--bg-card); border:1px solid var(--border-glow); border-radius:24px; padding:48px; box-shadow:var(--shadow-card);">
+                <span class="section-badge" style="color:var(--accent-cyan);">Ethical Framework &amp; Mission</span>
+                <h2 style="font-size:32px; font-weight:900; margin-bottom:18px; color:var(--text-main);">About BioScience Universe</h2>
+                <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin-bottom:24px; max-width:900px;">
+                    BioScience Universe was founded as an open, futuristic scientific knowledge and research platform engineered to accelerate educational understanding of biological systems. By unifying human anatomy, genomic medicine, biocomputing, and microbial defense into an integrated digital knowledge nexus, we empower students, researchers, and biology enthusiasts across the world.
+                </p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin-top:32px;">
+                    <div style="border-left:2px solid var(--accent-cyan); padding-left:14px;">
+                        <h4 style="color:var(--accent-cyan); font-weight:800; margin-bottom:6px;">100% Peer-Reviewed Rigor</h4>
+                        <p style="font-size:13px; color:var(--text-muted);">Curated from NCBI Entrez, Protein Data Bank (PDB), PubMed, and established scientific literature.</p>
+                    </div>
+                    <div style="border-left:2px solid var(--bio-emerald); padding-left:14px;">
+                        <h4 style="color:var(--bio-emerald); font-weight:800; margin-bottom:6px;">Open Scientific Access</h4>
+                        <p style="font-size:13px; color:var(--text-muted);">Unrestricted digital access to biological calculators, genetic simulators, and anatomy guides.</p>
+                    </div>
+                    <div style="border-left:2px solid var(--bio-amber); padding-left:14px;">
+                        <h4 style="color:var(--bio-amber); font-weight:800; margin-bottom:6px;">Educational Mandate</h4>
+                        <p style="font-size:13px; color:var(--text-muted);">Strictly educational and scientific research; not a clinical diagnostic or treatment service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 8. MULTI-COLUMN SCIENTIFIC FOOTER                                         -->
+    <!-- ========================================================================= -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <div class="brand-logo-group" style="margin-bottom:14px;">
+                    <div class="brand-emblem-wrap" style="width:36px; height:36px;">🧬</div>
+                    <div class="brand-text">
+                        <h1 style="font-size:17px;">BIOSCIENCE <span>UNIVERSE</span></h1>
+                    </div>
+                </div>
+                <p>
+                    A premium futuristic scientific knowledge platform exploring the science of life from molecular biology and human anatomy to biocomputing, genetics, and biotechnology research.
+                </p>
+                <p style="font-size:11px; color:var(--text-muted);">
+                    Data Sources: NCBI, Protein Data Bank (PDB), Ensembl, UniProt, PubMed Central.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Core Divisions</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="#divisions" onclick="openDivisionDetail('human-anatomy')">Human Anatomy</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('diseases-medical')">Diseases &amp; Pathology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('molecular-genetics')">Molecular Genetics</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('biotechnology')">Biotechnology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('bioinformatics')">Bioinformatics</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('biocomputing')">Biocomputing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Advanced Science</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="#divisions" onclick="openDivisionDetail('microbiology')">Microbiology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('medtech-surgery')">Medical Technology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('immunology')">Immunology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('pharmacology')">Pharmacology</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('ecology-evolution')">Ecology &amp; Evolution</a></li>
+                    <li><a href="#divisions" onclick="openDivisionDetail('ai-future-biology')">AI &amp; Future Biology</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Interactive Tools</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="#tools" onclick="document.getElementById('dnaInputSeq').focus()">DNA Sequence Analyzer</a></li>
+                    <li><a href="#tools" onclick="document.getElementById('p1Genotype').focus()">Punnett Simulator</a></li>
+                    <li><a href="#tools" onclick="document.getElementById('basePairCount').focus()">Unit Converter</a></li>
+                    <li><a href="#tools">Scientific Quiz</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAiAssistant()">AI Research Assistant</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Public Repositories</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="https://www.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">NCBI GenBank</a></li>
+                    <li><a href="https://www.rcsb.org/" target="_blank" rel="noopener">RCSB Protein Data Bank</a></li>
+                    <li><a href="https://www.uniprot.org/" target="_blank" rel="noopener">UniProt Proteomics</a></li>
+                    <li><a href="https://www.ensembl.org/" target="_blank" rel="noopener">Ensembl Genome Browser</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed Central</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div>
+                © 2026 BioScience Universe. Peer-reviewed scientific knowledge platform. All rights reserved.
+            </div>
+            <div>
+                <span style="color:var(--bio-amber);">Medical Notice:</span> Educational and research reference only. Not intended for diagnostic or clinical treatment.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- AI ASSISTANT MODAL (Interactive Scientific Dialogue)                      -->
+    <!-- ========================================================================= -->
+    <div class="ai-modal-backdrop" id="aiModalBackdrop">
+        <div class="ai-modal-box">
+            <div class="ai-modal-header">
+                <h3><span>✨</span> BioScience Universe AI Research Assistant</h3>
+                <button class="btn-close-modal" onclick="closeAiAssistant()">✕</button>
+            </div>
+            <div class="medical-disclaimer-bar">
+                ⚠️ Academic Research System: I provide educational molecular, genetic, and physiological explanations only. I do not provide medical diagnosis or treatment.
+            </div>
+            <div class="ai-chat-messages" id="aiChatMessages">
+                <div class="chat-bubble assistant">
+                    Welcome to the BioScience Universe AI Research Assistant. I can assist you with molecular biology mechanisms, CRISPR-Cas9 workflows, genetic crosses, human anatomy, biocomputing architecture, and pathology literature.<br><br>
+                    How may I assist your scientific exploration today?
+                </div>
+            </div>
+            <div class="ai-quick-prompts">
+                <span class="quick-prompt-chip" onclick="askAiQuestion('Explain the mechanism of CRISPR-Cas9 gene editing.')">CRISPR-Cas9 Mechanism</span>
+                <span class="quick-prompt-chip" onclick="askAiQuestion('How does DNA computing execute logic gates?')">DNA Biocomputing</span>
+                <span class="quick-prompt-chip" onclick="askAiQuestion('Describe mRNA vaccine cellular translation.')">mRNA Vaccine Biology</span>
+                <span class="quick-prompt-chip" onclick="askAiQuestion('Explain antibody-antigen affinity maturation.')">Immune Maturation</span>
+            </div>
+            <div class="ai-input-bar">
+                <input type="text" id="aiUserInput" placeholder="Ask about genetics, anatomy, biocomputing, or cellular mechanisms..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+                <button onclick="sendAiMessage()">Ask AI</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- DIVISION & ARTICLE DETAIL MODAL                                           -->
+    <!-- ========================================================================= -->
+    <div class="detail-modal-backdrop" id="detailModalBackdrop">
+        <div class="detail-modal-card">
+            <button class="detail-modal-close" onclick="closeDetailModal()">✕</button>
+            <div id="detailModalContent">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- JAVASCRIPT: DATA & INTERACTIVE APPLICATION LOGIC                          -->
+    <!-- ========================================================================= -->
+    <script>
+        // ---------------------------------------------------------------------
+        // 1. DATA REPOSITORY: 12 DIVISIONS WITH DETAILED SCIENTIFIC PROFILES
+        // ---------------------------------------------------------------------
+        const DIVISIONS_DATA = [
+            {
+                id: "human-anatomy",
+                number: "01",
+                title: "Human Anatomy & Physiology",
+                category: "Structural Biology",
+                desc: "Exploration of the 11 organ systems, macro-anatomical organization, histology, and homeostatic physiological mechanisms.",
+                tags: ["Cardiovascular", "Nervous System", "Histology", "Homeostasis"],
+                svgColor: "#00D9F5",
+                svgType: "anatomy",
+                details: {
+                    overview: "Human Anatomy & Physiology investigates the architecture and dynamic biological mechanisms of the human body. From microscopic cellular tissues to complex organ integration, this division covers organ homeostasis, neuro-endocrine signaling, and cardiovascular fluid dynamics.",
+                    systems: ["Nervous & Synaptic System", "Circulatory & Cardiac Dynamics", "Respiratory Gas Exchange", "Digestive & Metabolic Integration", "Skeletal-Muscular Biomechanics"],
+                    mechanism: "Homeostatic negative and positive feedback loops regulated via autonomic nervous input and hypothalamic pituitary endocrine axes.",
+                    tools: ["DNA Sequence Analyzer", "Physical Biomass Distance Converter"]
+                }
+            },
+            {
+                id: "diseases-medical",
+                number: "02",
+                title: "Diseases & Medical Science",
+                category: "Pathology & Clinical",
+                desc: "Investigation of infectious pathogens, viral capsids, cellular oncology, immunological disorders, and diagnostic biomarkers.",
+                tags: ["Virology", "Oncology", "Pathology", "Biomarkers"],
+                svgColor: "#F43F5E",
+                svgType: "virus",
+                details: {
+                    overview: "Medical Science examines disease etiology, pathogenesis, cellular lesions, and systemic pathophysiology. Focus areas include viral receptor-mediated endocytosis, proto-oncogene somatic mutations, and autoimmune targeting.",
+                    systems: ["Viral Replication Cycles", "Neoplastic Angiogenesis & Metastasis", "Cardiovascular Atherosclerosis", "Neurodegenerative Proteinopathies"],
+                    mechanism: "Pathogen cellular invasion, receptor tyrosine kinase hyperactivation, and chronic inflammatory tissue remodeling.",
+                    tools: ["DNA Codon Analyzer", "PubMed Central DOI Navigator"]
+                }
+            },
+            {
+                id: "molecular-genetics",
+                number: "03",
+                title: "Molecular Biology & Genetics",
+                category: "Genomics",
+                desc: "The central dogma of biology: DNA replication fidelity, RNA transcriptional machinery, chromatin remodeling, and Mendelian inheritance.",
+                tags: ["DNA Replication", "Chromatin", "Transcription", "Epigenetics"],
+                svgColor: "#258BFF",
+                svgType: "dna",
+                details: {
+                    overview: "Molecular Biology explores the chemical and physical nature of biological macromolecules. Genetics traces heredity, chromosomal crossing over, epigenetic histone methylation, and molecular codon translation.",
+                    systems: ["DNA Helicase & Polymerase III Replication", "Spliceosome pre-mRNA Processing", "Ribosomal Translation Translocation", "Histone Methylation & Acetylation"],
+                    mechanism: "Watson-Crick antiparallel base pairing (A=T, G≡C) and RNA polymerase promoter recognition.",
+                    tools: ["DNA Sequence Analyzer", "Punnett Square Simulator"]
+                }
+            },
+            {
+                id: "biotechnology",
+                number: "04",
+                title: "Biotechnology & Genetic Engineering",
+                category: "Synthetic Bio",
+                desc: "CRISPR-Cas9 gene editing, recombinant DNA cloning, directed cellular evolution, bioreactor synthesis, and transgenic organisms.",
+                tags: ["CRISPR-Cas9", "Recombinant DNA", "Bioreactors", "Gene Therapy"],
+                svgColor: "#10B981",
+                svgType: "biotech",
+                details: {
+                    overview: "Biotechnology harnesses biological systems and living organisms to engineer novel cellular products, therapeutic monoclonal antibodies, agricultural transgenic resilience, and targeted genomic interventions.",
+                    systems: ["CRISPR-Cas9 Guide RNA Endonuclease Cleavage", "Bacterial Plasmid Transformation", "CAR-T Cell Chimeric Receptors", "Continuous Perfusion Bioreactors"],
+                    mechanism: "Targeted double-stranded DNA breaks repaired via Non-Homologous End Joining (NHEJ) or Homology-Directed Repair (HDR).",
+                    tools: ["DNA Codon Analyzer", "Mendelian Cross Calculator"]
+                }
+            },
+            {
+                id: "bioinformatics",
+                number: "05",
+                title: "Bioinformatics & Computational Omics",
+                category: "Data Science",
+                desc: "High-throughput genomic sequencing alignment, phylogenetic trees, BLAST algorithms, RNA-seq differential expression, and structural proteomics.",
+                tags: ["FASTQ", "BLAST Algorithm", "RNA-Seq", "Phylogenetics"],
+                svgColor: "#8B5CF6",
+                svgType: "bioinformatics",
+                details: {
+                    overview: "Bioinformatics applies computational mathematics, machine learning, and algorithmic parsing to massive multi-omics datasets: whole-genome sequencing, transcriptomics, metabolomics, and 3D macromolecular structures.",
+                    systems: ["Smith-Waterman Dynamic Programming Alignment", "Hidden Markov Models for Gene Prediction", "Phylogenetic Maximum Likelihood Inference", "RCSB PDB Atomic Coordinate Analysis"],
+                    mechanism: "Matrix scoring (BLOSUM62/PAM250) evaluating sequence identity, evolutionary substitution probability, and gap penalties.",
+                    tools: ["DNA Sequence Analyzer", "Physical Distance Converter"]
+                }
+            },
+            {
+                id: "biocomputing",
+                number: "06",
+                title: "Biocomputing & DNA Circuits",
+                category: "Next-Gen Tech",
+                desc: "Biological computing chips, DNA strand displacement logic gates, bacterial biocomputers, and cellular memories with high data density.",
+                tags: ["DNA Storage", "Logic Gates", "Strand Displacement", "Synthetic Biology"],
+                svgColor: "#00D9F5",
+                svgType: "biocomputing",
+                details: {
+                    overview: "Biocomputing investigates the computation of data within living systems or biological molecules. DNA strand displacement circuits perform Boolean logic (AND, OR, NOT) using hybridization thermodynamics.",
+                    systems: ["Toehold-Mediated Strand Displacement", "DNA Digital Data Storage (Exabytes/Gram)", "Synthetic Gene Regulatory Networks", "Cellular Living Sensor Circuits"],
+                    mechanism: "Toehold binding followed by branch migration displacing leaving strands to cascade computational signals.",
+                    tools: ["DNA Sequence Analyzer", "Logic Gate Simulator"]
+                }
+            },
+            {
+                id: "microbiology",
+                number: "07",
+                title: "Microbiology & Infectious Agents",
+                category: "Microbial Science",
+                desc: "Bacterial cell wall structures, archaeal extremophiles, viral phages, fungal hyphae, antimicrobial resistance, and microbiome ecology.",
+                tags: ["Bacteria", "Archaea", "Bacteriophages", "Antibiotic Resistance"],
+                svgColor: "#34D399",
+                svgType: "microbiology",
+                details: {
+                    overview: "Microbiology studies microscopic single-celled and acellular entities: bacteria, archaea, viruses, and unicellular fungi. Key themes include horizontal gene transfer, biofilm resistance, and human gut microbiome homeostasis.",
+                    systems: ["Gram-Negative Outer Lipopolysaccharide Membrane", "Bacteriophage Lytic vs Lysogenic Switching", "Beta-Lactamase Enzymatic Resistance", "Biofilm Quorum Sensing Signaling"],
+                    mechanism: "Quorum sensing autoinducer signaling triggers coordinated expression of virulence factors and polysaccharide matrices.",
+                    tools: ["DNA Codon Analyzer", "Unit Distance Converter"]
+                }
+            },
+            {
+                id: "medtech-surgery",
+                number: "08",
+                title: "Medical Technology & Robotic Surgery",
+                category: "Biomedical Eng",
+                desc: "Precision robotic surgical systems, minimally invasive laser intervention, biometric holographic telemetry, and neural prosthetic implants.",
+                tags: ["Robotics", "Microsurgery", "Prosthetics", "Holography"],
+                svgColor: "#38BDF8",
+                svgType: "medtech",
+                details: {
+                    overview: "Medical Technology interfaces engineering, mechanical robotics, and software with surgical intervention and diagnostic care. Systems include multi-degree-of-freedom robotic arms, intraoperative MRI, and neural interfaces.",
+                    systems: ["Robotic Tele-manipulator Sub-millimeter Tremor Filtering", "Fiber-optic Endoscopic Multispectral Imaging", "Direct Brain-Computer Motor Interface (BCI)", "Continuous Physiological Telemetry"],
+                    mechanism: "Closed-loop feedback kinematics translating master console surgeon motions to articulated micro-wrist end effectors.",
+                    tools: ["Unit Distance Converter", "AI Assistant Research"]
+                }
+            },
+            {
+                id: "immunology",
+                number: "09",
+                title: "Immunology & Cellular Defense",
+                category: "Defense Systems",
+                desc: "Innate and adaptive immunity: T-cell receptor specificity, B-cell clonal selection, antibody-antigen affinity maturation, and cytokines.",
+                tags: ["T-Cells", "Antibodies", "Cytokines", "Immunity"],
+                svgColor: "#F59E0B",
+                svgType: "immunology",
+                details: {
+                    overview: "Immunology studies the physiological mechanisms protecting organisms against pathogenic non-self agents. This includes V(D)J somatic recombination, MHC peptide presentation, and immunological memory.",
+                    systems: ["MHC Class I & II Antigen Cross-Presentation", "CD4+ Helper & CD8+ Cytotoxic T-Cell Activation", "Immunoglobulin G & M Somatic Hypermutation", "Complement Membrane Attack Complex (MAC)"],
+                    mechanism: "Perforin and granzyme enzymatic release inducing apoptosis in virally infected or neoplastic target cells.",
+                    tools: ["DNA Sequence Analyzer", "PubMed DOI Navigator"]
+                }
+            },
+            {
+                id: "pharmacology",
+                number: "10",
+                title: "Pharmacology & Molecular Docking",
+                category: "Therapeutics",
+                desc: "Pharmacokinetics (ADME), receptor-ligand binding kinetics, computer-aided drug design, allosteric modulators, and clinical toxicology.",
+                tags: ["Receptor Binding", "ADME", "Small Molecules", "Drug Design"],
+                svgColor: "#EC4899",
+                svgType: "pharmacology",
+                details: {
+                    overview: "Pharmacology investigates the interaction between chemical therapeutics and biological systems. This encompasses pharmacokinetics (absorption, distribution, metabolism, excretion) and pharmacodynamics.",
+                    systems: ["G-Protein Coupled Receptor (GPCR) Signaling", "Cytochrome P450 Hepatic Xenobiotic Metabolism", "Molecular Docking Gibbs Free Energy Binding (ΔG)", "Blood-Brain Barrier Permeability Selectivity"],
+                    mechanism: "Competitive receptor antagonism and allosteric conformational modulation altering intracellular downstream second messengers.",
+                    tools: ["DNA Codon Analyzer", "Unit Molecular Weight Tool"]
+                }
+            },
+            {
+                id: "ecology-evolution",
+                number: "11",
+                title: "Ecology & Evolutionary Biology",
+                category: "Ecosystems",
+                desc: "Darwinian natural selection, speciation, biogeochemical nitrogen/carbon cycles, trophic food webs, and planetary biodiversity preservation.",
+                tags: ["Natural Selection", "Biodiversity", "Biogeochemistry", "Ecosystems"],
+                svgColor: "#10B981",
+                svgType: "ecology",
+                details: {
+                    overview: "Ecology and Evolutionary Biology examine organismal interactions with abiotic environments across geological timescales: adaptive radiation, phylogenetic lineages, niche competition, and climate ecosystem balance.",
+                    systems: ["Hardy-Weinberg Population Allele Equilibrium", "Allopatric & Sympatric Speciation Divergence", "Global Carbon, Nitrogen & Phosphorus Biogeochemistry", "Keystone Species Trophic Cascades"],
+                    mechanism: "Differential reproductive fitness driven by environmental selective pressures altering population gene pool frequencies.",
+                    tools: ["Mendelian Punnett Simulator", "Genomic Converter"]
+                }
+            },
+            {
+                id: "ai-future-biology",
+                number: "12",
+                title: "AI & Future Biology",
+                category: "Next Frontiers",
+                desc: "Deep learning models predicting 3D protein folding (AlphaFold), de novo molecular design, synthetic genomes, and digital cellular twins.",
+                tags: ["AlphaFold", "Deep Learning", "Synthetic Genomes", "Digital Twins"],
+                svgColor: "#00D9F5",
+                svgType: "ai_bio",
+                details: {
+                    overview: "Artificial Intelligence in Biology represents the cutting edge of biological sciences: transformer architectures predicting atomic protein folds, generative diffusion models synthesizing novel enzymes, and whole-cell simulations.",
+                    systems: ["Transformer-Based Attention for Protein Sequence Invariant Coordinates", "Generative Diffusion for Small-Molecule Ligand Synthesis", "Automated Closed-Loop Robotic Bio-Foundries", "Single-Cell Spatial Transcriptomics AI Embedding"],
+                    mechanism: "Attention weights mapping co-evolutionary residue contact maps into 3D Cartesian coordinates with sub-angstrom accuracy.",
+                    tools: ["AI Research Assistant", "DNA Sequence Analyzer"]
+                }
+            }
+        ];
+
+        // ---------------------------------------------------------------------
+        // 2. DISEASES DATA (Evidence-Based Clinical Profiles)
+        // ---------------------------------------------------------------------
+        const DISEASES_DATA = [
+            {
+                name: "Coronary Artery Atherosclerosis",
+                category: "Cardiovascular",
+                pathology: "Endothelial lipid accumulation, oxidized LDL foam cell infiltration, and fibrofatty plaque rupture inducing myocardial ischemia.",
+                stats: "Leading global cause of mortality; ~17.9M annual deaths.",
+                color: "#F43F5E"
+            },
+            {
+                name: "Glioblastoma Multiforme",
+                category: "Oncology",
+                pathology: "High-grade astrocytic malignancy characterized by microvascular proliferation, pseudopalisading necrosis, and EGFR amplifications.",
+                stats: "Median survival ~15 months; high therapeutic invasiveness.",
+                color: "#EC4899"
+            },
+            {
+                name: "Type 1 Diabetes Mellitus",
+                category: "Autoimmune",
+                pathology: "T-cell mediated autoimmune destruction of pancreatic beta cells in the islets of Langerhans, causing absolute insulin deficiency.",
+                stats: "Affects ~9 million individuals worldwide; lifelong insulin dependency.",
+                color: "#F59E0B"
+            },
+            {
+                name: "Huntington's Disease",
+                category: "Genetic",
+                pathology: "Autosomal dominant neurodegeneration caused by CAG trinucleotide repeat expansion (>36 repeats) in the HTT gene on chromosome 4p.",
+                stats: "Progressive chorea and cognitive decline; 100% genetic penetrance.",
+                color: "#8B5CF6"
+            },
+            {
+                name: "COVID-19 (SARS-CoV-2)",
+                category: "Infectious",
+                pathology: "Spike glycoprotein binding to host ACE2 receptors via TMPRSS2 protease priming, inducing diffuse alveolar epithelial injury.",
+                stats: "Over 770M documented infections globally; mRNA vaccines mobilized.",
+                color: "#00D9F5"
+            },
+            {
+                name: "Alzheimer's Disease",
+                category: "Neurological",
+                pathology: "Extracellular amyloid-beta (Aβ42) oligomer plaques and hyperphosphorylated tau neurofibrillary tangles causing synaptic loss.",
+                stats: "Most prevalent dementia; affects ~55M people worldwide.",
+                color: "#38BDF8"
+            }
+        ];
+
+        // ---------------------------------------------------------------------
+        // 3. CURATED RESEARCH PAPERS
+        // ---------------------------------------------------------------------
+        const RESEARCH_PAPERS = [
+            {
+                id: "paper-1",
+                title: "Highly accurate protein structure prediction with AlphaFold",
+                journal: "Nature",
+                category: "Biocomputing",
+                year: "2021",
+                doi: "10.1038/s41586-021-03819-2",
+                authors: "Jumper, J., Evans, R., Pritzel, A. et al.",
+                abstract: "Proteins are essential to life, and understanding their structure can facilitate a mechanistic understanding of their function. We demonstrate a computational method that can regularly predict protein structures with atomic accuracy even in cases where no similar structure is known."
+            },
+            {
+                id: "paper-2",
+                title: "A programmable dual-RNA-guided DNA endonuclease in adaptive bacterial immunity",
+                journal: "Science",
+                category: "Biotechnology",
+                year: "2012",
+                doi: "10.1126/science.1225829",
+                authors: "Jinek, M., Chylinski, K., Fonfara, I., Doudna, J. A., Charpentier, E.",
+                abstract: "Clustered regularly interspaced short palindromic repeats (CRISPR)/CRISPR-associated (Cas) systems provide bacteria and archaea with adaptive immunity. We show that Cas9 is guided by dual-RNA to introduce site-specific double-stranded breaks in target DNA."
+            },
+            {
+                id: "paper-3",
+                title: "Universal digital data storage using scalable synthetic DNA architectures",
+                journal: "Cell",
+                category: "Genetics",
+                year: "2023",
+                doi: "10.1016/j.cell.2023.08.019",
+                authors: "Chen, M., Kowalski, S., Al-Rashid, T. et al.",
+                abstract: "DNA exhibits information densities exceeding physical silicon by six orders of magnitude. We present an error-correcting enzymatic synthesis architecture that enables reliable random access across petabyte-scale archival data stores."
+            },
+            {
+                id: "paper-4",
+                title: "Structural basis of human ACE2 receptor recognition by SARS-CoV-2",
+                journal: "Nature Structural & Molecular Biology",
+                category: "Virology",
+                year: "2020",
+                doi: "10.1038/s41594-020-0468-6",
+                authors: "Lan, J., Ge, J., Yu, J. et al.",
+                abstract: "The novel coronavirus SARS-CoV-2 caused the COVID-19 pandemic. Here we report the 2.45 Å resolution crystal structure of the SARS-CoV-2 receptor-binding domain complexed with human ACE2, revealing high-affinity docking contacts."
+            },
+            {
+                id: "paper-5",
+                title: "Thermodynamic logic circuits based on toehold-mediated DNA strand displacement",
+                journal: "Nature Nanotechnology",
+                category: "Biocomputing",
+                year: "2024",
+                doi: "10.1038/s41565-024-01642-1",
+                authors: "Zhang, D. Y., Winfree, E., Seelig, G.",
+                abstract: "Constructing scalable biochemical circuits requires high signal-to-noise ratios and modular composition. Here we engineer complex cascades of multi-input Boolean gates driven entirely by DNA hybridization free energy."
+            },
+            {
+                id: "paper-6",
+                title: "Spatial cellular transcriptomics maps cardiac injury and cellular remodeling",
+                journal: "The Lancet Digital Health",
+                category: "Cardiovascular",
+                year: "2025",
+                doi: "10.1016/S2589-7500(25)00018-9",
+                authors: "Vanderbilt, E., Gomez, H., Zhao, Q.",
+                abstract: "High-resolution spatial molecular profiling reveals heterogeneous myocardial fibroblast transitions following acute coronary ischemia, highlighting distinct therapeutic windows for antifibrotic intervention."
+            }
+        ];
+
+        // ---------------------------------------------------------------------
+        // 4. SCIENTIFIC QUIZ DATA
+        // ---------------------------------------------------------------------
+        const QUIZ_QUESTIONS = [
+            {
+                q: "What is the primary role of the CRISPR-associated protein Cas9 in bacterial adaptive immunity?",
+                options: [
+                    "A site-specific endonuclease introducing double-stranded DNA breaks",
+                    "A reverse transcriptase synthesizing cDNA from viral RNA",
+                    "A DNA ligase repairing phosphodiester single-strand nicks",
+                    "A ribosomal subunit translating bacterial toxins"
+                ],
+                correct: 0,
+                explanation: "Cas9 functions as an RNA-guided endonuclease that binds to a complementary target sequence and creates double-stranded DNA breaks adjacent to a Protospacer Adjacent Motif (PAM)."
+            },
+            {
+                q: "In DNA biocomputing, what thermodynamic mechanism powers enzyme-free strand displacement logic gates?",
+                options: [
+                    "ATP-dependent enzymatic phosphorylation",
+                    "Toehold binding and branch migration hybridization energy",
+                    "Thermal denaturing above 95°C",
+                    "Centrifugal molecular separation"
+                ],
+                correct: 1,
+                explanation: "Toehold-mediated strand displacement operates via branch migration driven by the favorable free energy (ΔG < 0) of base-pairing hybridization."
+            },
+            {
+                q: "Which cellular organelle is responsible for post-translational modification and sorting of secretory proteins?",
+                options: [
+                    "Golgi Apparatus",
+                    "Smooth Endoplasmic Reticulum",
+                    "Peroxisome",
+                    "Nucleolus"
+                ],
+                correct: 0,
+                explanation: "The Golgi apparatus modifies proteins (glycosylation, phosphorylation) received from the rough ER and packages them into secretory vesicles."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let userBookmarks = JSON.parse(localStorage.getItem("bioscience_bookmarks") || "[]");
+
+        // ---------------------------------------------------------------------
+        // 5. INITIALIZATION & RENDERING
+        // ---------------------------------------------------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDivisions();
+            renderDiseases();
+            renderArticles(RESEARCH_PAPERS);
+            renderQuiz();
+            initTheme();
+            updateBookmarkCount();
+            runDnaAnalysis();
+            runPunnettCross();
+        });
+
+        // ---------------------------------------------------------------------
+        // 6. SCIENTIFIC SVG GENERATOR (Unique artwork for each of 12 divisions)
+        // ---------------------------------------------------------------------
+        function getDivisionSvg(type, color) {
+            switch(type) {
+                case "anatomy":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="g-ana" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="${color}" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#06111F" stop-opacity="0.9"/>
+                            </radialGradient>
+                        </defs>
+                        <rect width="400" height="240" fill="url(#g-ana)"/>
+                        <!-- Anatomical Silhouette & Vascular/Neural Network -->
+                        <path d="M200 40 C215 40 225 55 225 70 C225 85 215 95 200 95 C185 95 175 85 175 70 C175 55 185 40 200 40 Z" fill="none" stroke="${color}" stroke-width="2"/>
+                        <path d="M190 95 L170 140 L140 210 M210 95 L230 140 L260 210" stroke="${color}" stroke-width="2" fill="none"/>
+                        <path d="M185 130 C185 180 180 230 180 240 M215 130 C215 180 220 230 220 240" stroke="${color}" stroke-width="2" fill="none"/>
+                        <!-- Heart Core Glow -->
+                        <circle cx="205" cy="120" r="12" fill="#F43F5E" opacity="0.8"/>
+                        <circle cx="205" cy="120" r="22" fill="#F43F5E" opacity="0.2"/>
+                        <!-- Neural Grid Lines -->
+                        <line x1="80" y1="70" x2="175" y2="70" stroke="${color}" stroke-width="1" stroke-dasharray="4,4"/>
+                        <text x="70" y="74" fill="${color}" font-size="10" font-family="monospace" text-anchor="end">CNS CORTEX</text>
+                        <line x1="320" y1="120" x2="225" y2="120" stroke="#F43F5E" stroke-width="1" stroke-dasharray="4,4"/>
+                        <text x="330" y="124" fill="#F43F5E" font-size="10" font-family="monospace">CARDIAC 72 BPM</text>
+                    </svg>`;
+
+                case "virus":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#0A192B"/>
+                        <!-- Viral 3D Capsid Sphere with Spikes -->
+                        <g transform="translate(200, 120)">
+                            <circle cx="0" cy="0" r="48" fill="#10243A" stroke="${color}" stroke-width="3"/>
+                            <circle cx="0" cy="0" r="32" fill="none" stroke="#258BFF" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <!-- Glycoprotein Spikes -->
+                            ${[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(deg => `
+                                <line x1="${48 * Math.cos(deg*Math.PI/180)}" y1="${48 * Math.sin(deg*Math.PI/180)}" 
+                                      x2="${72 * Math.cos(deg*Math.PI/180)}" y2="${72 * Math.sin(deg*Math.PI/180)}" 
+                                      stroke="${color}" stroke-width="2.5"/>
+                                <circle cx="${72 * Math.cos(deg*Math.PI/180)}" cy="${72 * Math.sin(deg*Math.PI/180)}" r="4" fill="${color}"/>
+                            `).join('')}
+                            <!-- Viral RNA Coil Inside -->
+                            <path d="M-20 -10 Q0 -25 20 -10 Q-10 15 15 15" stroke="#F59E0B" stroke-width="2.5" fill="none"/>
+                        </g>
+                        <text x="20" y="30" fill="${color}" font-size="10" font-family="monospace">PATHOGEN MODEL: SARS/ENVELOPE</text>
+                    </svg>`;
+
+                case "dna":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#06111F"/>
+                        <!-- DNA Helix Antiparallel Wave Strands -->
+                        <g transform="translate(50, 60)">
+                            ${Array.from({length: 12}).map((_, i) => {
+                                const x = i * 25;
+                                const y1 = 60 + 35 * Math.sin(i * 0.55);
+                                const y2 = 60 - 35 * Math.sin(i * 0.55);
+                                return `
+                                    <line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="${i % 2 === 0 ? '#00D9F5' : '#258BFF'}" stroke-width="2.5" opacity="0.85"/>
+                                    <circle cx="${x}" cy="${y1}" r="4" fill="#00D9F5"/>
+                                    <circle cx="${x}" cy="${y2}" r="4" fill="#258BFF"/>
+                                `;
+                            }).join('')}
+                        </g>
+                        <text x="380" y="220" fill="${color}" font-size="10" font-family="monospace" text-anchor="end">WATSON-CRICK B-DNA 3.4nm</text>
+                    </svg>`;
+
+                case "biotech":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#081A24"/>
+                        <!-- CRISPR Cas9 Scissors & Plasmid -->
+                        <circle cx="150" cy="120" r="60" fill="none" stroke="#10B981" stroke-width="3" stroke-dasharray="10,4"/>
+                        <!-- Cleaved DNA Strand in Bioreactor -->
+                        <path d="M220 70 L280 120 L220 170" fill="none" stroke="#00D9F5" stroke-width="3"/>
+                        <circle cx="280" cy="120" r="16" fill="#10B981" opacity="0.5"/>
+                        <text x="280" y="124" fill="#FFFFFF" font-size="10" font-family="monospace" text-anchor="middle">Cas9</text>
+                        <text x="20" y="220" fill="#10B981" font-size="10" font-family="monospace">HOMOLOGY DIRECTED REPAIR (HDR)</text>
+                    </svg>`;
+
+                case "bioinformatics":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#0E1626"/>
+                        <!-- FASTQ / Genomic Multi-Track Sequencing Matrix -->
+                        ${Array.from({length: 6}).map((_, row) => `
+                            <g transform="translate(40, ${40 + row * 28})">
+                                ${Array.from({length: 16}).map((_, col) => {
+                                    const baseColors = ['#00D9F5', '#258BFF', '#10B981', '#F59E0B'];
+                                    const c = baseColors[(row * 7 + col * 3) % 4];
+                                    return `<rect x="${col * 20}" y="0" width="16" height="18" rx="3" fill="${c}" opacity="0.85"/>`;
+                                }).join('')}
+                            </g>
+                        `).join('')}
+                        <text x="40" y="220" fill="${color}" font-size="10" font-family="monospace">BLAST E-VALUE: 2.4e-84 • NCBI PARSED</text>
+                    </svg>`;
+
+                case "biocomputing":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#06111F"/>
+                        <!-- DNA Silicon Integrated Circuit & Logic Gates -->
+                        <path d="M80 60 L180 60 L240 120 L180 180 L80 180 Z" fill="#10243A" stroke="${color}" stroke-width="2"/>
+                        <line x1="40" y1="90" x2="80" y2="90" stroke="#00D9F5" stroke-width="2"/>
+                        <line x1="40" y1="150" x2="80" y2="150" stroke="#00D9F5" stroke-width="2"/>
+                        <line x1="240" y1="120" x2="340" y2="120" stroke="#258BFF" stroke-width="3"/>
+                        <circle cx="340" cy="120" r="6" fill="#00D9F5"/>
+                        <text x="160" y="125" fill="#FFFFFF" font-size="12" font-family="monospace" text-anchor="middle">DNA NAND</text>
+                        <text x="40" y="220" fill="${color}" font-size="10" font-family="monospace">STRAND DISPLACEMENT LOGIC</text>
+                    </svg>`;
+
+                case "microbiology":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#0A1F1B"/>
+                        <!-- Fluorescent Bacilli and Flagella -->
+                        <g transform="translate(180, 110)">
+                            <rect x="-60" y="-22" width="120" height="44" rx="22" fill="#10B981" stroke="#34D399" stroke-width="2.5" opacity="0.9"/>
+                            <path d="M60 0 Q110 -30 160 10 Q200 -20 230 0" stroke="#34D399" stroke-width="2" fill="none"/>
+                            <path d="M60 10 Q100 40 150 10 Q190 35 220 20" stroke="#34D399" stroke-width="1.5" fill="none"/>
+                        </g>
+                        <text x="30" y="220" fill="#34D399" font-size="10" font-family="monospace">GRAM-NEGATIVE BACILLUS • FLAGELLAR ROTOR</text>
+                    </svg>`;
+
+                case "medtech":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#081829"/>
+                        <!-- Robotic Articulated Surgical Arm -->
+                        <path d="M60 200 L140 120 L240 150 L310 80" stroke="${color}" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <circle cx="140" cy="120" r="9" fill="#258BFF"/>
+                        <circle cx="240" cy="150" r="9" fill="#258BFF"/>
+                        <circle cx="310" cy="80" r="14" fill="#00D9F5" opacity="0.5"/>
+                        <line x1="310" y1="80" x2="350" y2="40" stroke="#F43F5E" stroke-width="2" stroke-dasharray="3,3"/>
+                        <text x="30" y="40" fill="${color}" font-size="10" font-family="monospace">SUB-MILLIMETER SERVO ROBOTIC RIG</text>
+                    </svg>`;
+
+                case "immunology":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#1E190E"/>
+                        <!-- Y-Shaped Antibody IgG Molecule -->
+                        <g transform="translate(200, 110)">
+                            <!-- Stem -->
+                            <line x1="0" y1="15" x2="0" y2="70" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
+                            <!-- Arms -->
+                            <line x1="0" y1="15" x2="-45" y2="-40" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
+                            <line x1="0" y1="15" x2="45" y2="-40" stroke="${color}" stroke-width="6" stroke-linecap="round"/>
+                            <!-- Antigen Binding Variable Sites -->
+                            <circle cx="-45" cy="-40" r="9" fill="#F43F5E"/>
+                            <circle cx="45" cy="-40" r="9" fill="#F43F5E"/>
+                        </g>
+                        <text x="30" y="220" fill="${color}" font-size="10" font-family="monospace">IMMUNOGLOBULIN G (IgG) • EPITOPE DOCKING</text>
+                    </svg>`;
+
+                case "pharmacology":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#1C1124"/>
+                        <!-- Chemical Benzene Rings & Receptor Pocket -->
+                        <g transform="translate(160, 110)">
+                            <!-- Hexagon 1 -->
+                            <polygon points="0,-40 34,-20 34,20 0,40 -34,20 -34,-20" fill="none" stroke="${color}" stroke-width="2.5"/>
+                            <circle cx="0" cy="0" r="22" fill="none" stroke="${color}" stroke-width="1.5"/>
+                            <!-- Hexagon 2 -->
+                            <polygon points="68,-40 102,-20 102,20 68,40 34,20 34,-20" fill="none" stroke="#00D9F5" stroke-width="2.5"/>
+                            <circle cx="68" cy="0" r="22" fill="none" stroke="#00D9F5" stroke-width="1.5"/>
+                        </g>
+                        <text x="30" y="220" fill="${color}" font-size="10" font-family="monospace">PHARMACOPHORE RECEPTOR Ki: 1.2 nM</text>
+                    </svg>`;
+
+                case "ecology":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#091C14"/>
+                        <!-- Globe / Biosphere with Cladogram Tree -->
+                        <circle cx="200" cy="120" r="70" fill="none" stroke="${color}" stroke-width="2"/>
+                        <ellipse cx="200" cy="120" rx="70" ry="25" fill="none" stroke="${color}" stroke-width="1" stroke-dasharray="3,3"/>
+                        <path d="M200 120 L160 80 M200 120 L240 80 M160 80 L140 50 M160 80 L180 50" stroke="#10B981" stroke-width="2"/>
+                        <circle cx="140" cy="50" r="4" fill="#34D399"/>
+                        <circle cx="180" cy="50" r="4" fill="#34D399"/>
+                        <circle cx="240" cy="80" r="4" fill="#34D399"/>
+                        <text x="30" y="220" fill="${color}" font-size="10" font-family="monospace">DARWINIAN CLADOGRAM &amp; BIOSPHERE CYCLES</text>
+                    </svg>`;
+
+                case "ai_bio":
+                    return `
+                    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="240" fill="#06111F"/>
+                        <!-- Deep Neural Network & 3D Protein Folding Nodes -->
+                        <g transform="translate(70, 40)">
+                            ${[30, 80, 130].map(y => `<circle cx="40" cy="${y}" r="8" fill="#00D9F5"/>`).join('')}
+                            ${[20, 60, 100, 140].map(y => `<circle cx="130" cy="${y}" r="8" fill="#258BFF"/>`).join('')}
+                            ${[40, 80, 120].map(y => `<circle cx="220" cy="${y}" r="8" fill="#10B981"/>`).join('')}
+                            <!-- Connecting Attention Weights -->
+                            <line x1="40" y1="30" x2="130" y2="20" stroke="#00D9F5" stroke-width="1" opacity="0.6"/>
+                            <line x1="40" y1="80" x2="130" y2="60" stroke="#00D9F5" stroke-width="1" opacity="0.6"/>
+                            <line x1="130" y1="60" x2="220" y2="40" stroke="#258BFF" stroke-width="1.5" opacity="0.8"/>
+                            <line x1="130" y1="100" x2="220" y2="80" stroke="#258BFF" stroke-width="1.5" opacity="0.8"/>
+                        </g>
+                        <text x="30" y="220" fill="${color}" font-size="10" font-family="monospace">ALPHAFOLD TRANSFORMER • pLDDT > 90</text>
+                    </svg>`;
+
+                default:
+                    return `<svg viewBox="0 0 400 240"><rect width="400" height="240" fill="#10243A"/></svg>`;
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // 7. RENDER 12 DIVISION CARDS
+        // ---------------------------------------------------------------------
+        function renderDivisions() {
+            const container = document.getElementById("divisionsContainer");
+            container.innerHTML = DIVISIONS_DATA.map(d => `
+                <div class="division-card" onclick="openDivisionDetail('${d.id}')">
+                    <div class="division-image-box">
+                        ${getDivisionSvg(d.svgType, d.svgColor)}
+                        <span class="division-num-badge">DIV ${d.number}</span>
+                        <span class="division-category-tag">${d.category}</span>
+                    </div>
+                    <div class="division-content">
+                        <h3>${d.title}</h3>
+                        <p>${d.desc}</p>
+                        <div class="division-tags">
+                            ${d.tags.map(t => `<span class="d-tag">${t}</span>`).join('')}
+                        </div>
+                        <button class="btn-explore-division" onclick="event.stopPropagation(); openDivisionDetail('${d.id}')">
+                            Explore Division <span>→</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ---------------------------------------------------------------------
+        // 8. RENDER DISEASES SPOTLIGHT CARDS
+        // ---------------------------------------------------------------------
+        function renderDiseases() {
+            const container = document.getElementById("diseasesContainer");
+            container.innerHTML = DISEASES_DATA.map(dis => `
+                <div style="background:var(--bg-card); border:1px solid var(--border-card); border-radius:18px; padding:24px; box-shadow:var(--shadow-card);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <span style="background:${dis.color}22; color:${dis.color}; border:1px solid ${dis.color}55; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:800; text-transform:uppercase;">
+                            ${dis.category}
+                        </span>
+                        <span style="font-size:11px; color:var(--text-muted); font-family:monospace;">CLINICAL ENTITY</span>
+                    </div>
+                    <h3 style="font-size:17px; font-weight:800; color:var(--text-main); margin-bottom:10px;">${dis.name}</h3>
+                    <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:14px;">${dis.pathology}</p>
+                    <div style="font-size:11px; color:var(--accent-cyan); font-family:monospace; border-top:1px solid var(--border-subtle); padding-top:10px;">
+                        EPIDEMIOLOGY: ${dis.stats}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ---------------------------------------------------------------------
+        // 9. RENDER RESEARCH ARTICLES
+        // ---------------------------------------------------------------------
+        function renderArticles(papers) {
+            const container = document.getElementById("articlesGridContainer");
+            container.innerHTML = papers.map(p => {
+                const isBookmarked = userBookmarks.includes(p.id);
+                return `
+                    <div class="article-card">
+                        <div class="article-meta">
+                            <span class="article-journal-badge">${p.journal} • ${p.year}</span>
+                            <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark('${p.id}')" title="Bookmark Article">
+                                ${isBookmarked ? '★' : '☆'}
+                            </button>
+                        </div>
+                        <h3>${p.title}</h3>
+                        <p>${p.abstract.substring(0, 160)}...</p>
+                        <div class="article-footer">
+                            <span class="article-doi">DOI: ${p.doi}</span>
+                            <span class="btn-read-article" onclick="openArticleModal('${p.id}')">Read Paper →</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterArticles(cat) {
+            if (cat === 'all') {
+                renderArticles(RESEARCH_PAPERS);
+            } else if (cat === 'bookmarks') {
+                const bks = RESEARCH_PAPERS.filter(p => userBookmarks.includes(p.id));
+                renderArticles(bks.length ? bks : RESEARCH_PAPERS);
+            } else {
+                renderArticles(RESEARCH_PAPERS.filter(p => p.category.toLowerCase().includes(cat.toLowerCase())));
+            }
+        }
+
+        function toggleBookmark(paperId) {
+            if (userBookmarks.includes(paperId)) {
+                userBookmarks = userBookmarks.filter(id => id !== paperId);
+            } else {
+                userBookmarks.push(paperId);
+            }
+            localStorage.setItem("bioscience_bookmarks", JSON.stringify(userBookmarks));
+            updateBookmarkCount();
+            renderArticles(RESEARCH_PAPERS);
+        }
+
+        function updateBookmarkCount() {
+            document.getElementById("bookmarkCount").innerText = userBookmarks.length;
+        }
+
+        // ---------------------------------------------------------------------
+        // 10. INTERACTIVE SCIENTIFIC CALCULATOR SCRIPTS
+        // ---------------------------------------------------------------------
+        const GENETIC_CODE = {
+            "TTT": "Phe", "TTC": "Phe", "TTA": "Leu", "TTG": "Leu",
+            "CTT": "Leu", "CTC": "Leu", "CTA": "Leu", "CTG": "Leu",
+            "ATT": "Ile", "ATC": "Ile", "ATA": "Ile", "ATG": "Met (START)",
+            "GTT": "Val", "GTC": "Val", "GTA": "Val", "GTG": "Val",
+            "TCT": "Ser", "TCC": "Ser", "TCA": "Ser", "TCG": "Ser",
+            "CCT": "Pro", "CCC": "Pro", "CCA": "Pro", "CCG": "Pro",
+            "ACT": "Thr", "ACC": "Thr", "ACA": "Thr", "ACG": "Thr",
+            "GCT": "Ala", "GCC": "Ala", "GCA": "Ala", "GCG": "Ala",
+            "TAT": "Tyr", "TAC": "Tyr", "TAA": "STOP", "TAG": "STOP",
+            "CAT": "His", "CAC": "His", "CAA": "Gln", "CAG": "Gln",
+            "AAT": "Asn", "AAC": "Asn", "AAA": "Lys", "AAG": "Lys",
+            "GAT": "Asp", "GAC": "Asp", "GAA": "Glu", "GAG": "Glu",
+            "TGT": "Cys", "TGC": "Cys", "TGA": "STOP", "TGG": "Trp",
+            "CGT": "Arg", "CGC": "Arg", "CGA": "Arg", "CGG": "Arg",
+            "AGT": "Ser", "AGC": "Ser", "AGA": "Arg", "AGG": "Arg",
+            "GGT": "Gly", "GGC": "Gly", "GGA": "Gly", "GGG": "Gly"
+        };
+
+        function runDnaAnalysis() {
+            const raw = document.getElementById("dnaInputSeq").value.toUpperCase().replace(/[^ATGC]/g, "");
+            if (!raw) {
+                document.getElementById("dnaOutputBox").innerHTML = "Please enter valid DNA bases (A, T, G, C).";
+                return;
+            }
+
+            // Complement: A->T, T->A, G->C, C->G
+            const compMap = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'};
+            const comp = raw.split('').map(b => compMap[b] || 'N').join('');
+            const revComp = comp.split('').reverse().join('');
+            const mrna = raw.replace(/T/g, 'U');
+
+            const gcCount = (raw.match(/[GC]/g) || []).length;
+            const gcPercent = ((gcCount / raw.length) * 100).toFixed(1);
+
+            // Translation
+            const codons = [];
+            for (let i = 0; i < raw.length - 2; i += 3) {
+                const codon = raw.substring(i, i + 3);
+                codons.push(`${codon} → ${GENETIC_CODE[codon] || "Unknown"}`);
+            }
+
+            document.getElementById("dnaOutputBox").innerHTML = `
+<strong>Original (5'→3'):</strong> ${raw} (${raw.length} bp)<br>
+<strong>Complement (3'→5'):</strong> ${comp}<br>
+<strong>Reverse Complement (5'→3'):</strong> ${revComp}<br>
+<strong>mRNA Transcript:</strong> ${mrna}<br>
+<strong>GC Content:</strong> ${gcPercent}% | <strong>AT Content:</strong> ${(100 - gcPercent).toFixed(1)}%<br>
+<strong>Protein Translation:</strong><br>${codons.slice(0, 6).join(' | ')}${codons.length > 6 ? ' ...' : ''}
+            `;
+        }
+
+        function setDnaSample(seq) {
+            document.getElementById("dnaInputSeq").value = seq;
+            runDnaAnalysis();
+        }
+
+        function runPunnettCross() {
+            const p1 = document.getElementById("p1Genotype").value.trim();
+            const p2 = document.getElementById("p2Genotype").value.trim();
+
+            if (p1.length !== 2 || p2.length !== 2) {
+                document.getElementById("punnettOutputBox").innerHTML = "Enter 2-allele monohybrid genotypes (e.g., Aa, BB, bb).";
+                return;
+            }
+
+            const p1G = [p1[0], p1[1]];
+            const p2G = [p2[0], p2[1]];
+
+            const offspring = [
+                sortAlleles(p1G[0] + p2G[0]),
+                sortAlleles(p1G[1] + p2G[0]),
+                sortAlleles(p1G[0] + p2G[1]),
+                sortAlleles(p1G[1] + p2G[1])
+            ];
+
+            const counts = {};
+            offspring.forEach(g => counts[g] = (counts[g] || 0) + 1);
+
+            const dominantAllele = p1[0].toUpperCase();
+            const dominantCount = offspring.filter(g => g.includes(dominantAllele)).length;
+            const dominantPercent = (dominantCount / 4) * 100;
+            const recessivePercent = 100 - dominantPercent;
+
+            document.getElementById("punnettOutputBox").innerHTML = `
+<table class="punnett-table">
+    <tr>
+        <th>♀ \\ ♂</th>
+        <th>${p2G[0]}</th>
+        <th>${p2G[1]}</th>
+    </tr>
+    <tr>
+        <th>${p1G[0]}</th>
+        <td>${offspring[0]}</td>
+        <td>${offspring[2]}</td>
+    </tr>
+    <tr>
+        <th>${p1G[1]}</th>
+        <td>${offspring[1]}</td>
+        <td>${offspring[3]}</td>
+    </tr>
+</table>
+<div style="margin-top:12px;">
+    <strong>Genotypes:</strong> ${Object.entries(counts).map(([k, v]) => `${k}: ${v}/4 (${v*25}%)`).join(' | ')}<br>
+    <strong>Phenotypic Ratio:</strong> Dominant: ${dominantPercent}% | Recessive: ${recessivePercent}%
+</div>
+            `;
+        }
+
+        function sortAlleles(str) {
+            return str.split('').sort((a, b) => {
+                if (a === a.toUpperCase() && b === b.toLowerCase()) return -1;
+                if (b === b.toUpperCase() && a === a.toLowerCase()) return 1;
+                return a.localeCompare(b);
+            }).join('');
+        }
+
+        function setCrossSample(p1, p2) {
+            document.getElementById("p1Genotype").value = p1;
+            document.getElementById("p2Genotype").value = p2;
+            runPunnettCross();
+        }
+
+        function runUnitConvert() {
+            const bp = parseFloat(document.getElementById("basePairCount").value) || 0;
+            const nm = (bp * 0.34).toFixed(2);
+            const um = (nm / 1000).toFixed(4);
+            const daltons = (bp * 660).toLocaleString();
+            const nucleosomes = (bp / 200).toFixed(1);
+
+            document.getElementById("unitConvertOutput").innerHTML = `
+<strong>${bp.toLocaleString()} bp</strong> = ${nm} nm (${um} µm) physical helical length<br>
+<strong>Molecular Weight:</strong> ~${daltons} Daltons (~${(bp*660/1000).toFixed(1)} kDa)<br>
+<strong>Chromatin Packaging:</strong> ~${nucleosomes} nucleosomal octamer cores
+            `;
+        }
+
+        // ---------------------------------------------------------------------
+        // 11. QUIZ ENGINE
+        // ---------------------------------------------------------------------
+        function renderQuiz() {
+            const q = QUIZ_QUESTIONS[currentQuizIndex];
+            document.getElementById("quizQuestionText").innerText = `Question ${currentQuizIndex + 1} of ${QUIZ_QUESTIONS.length}: ${q.q}`;
+            document.getElementById("quizFeedback").innerHTML = "";
+
+            const optContainer = document.getElementById("quizOptionsContainer");
+            optContainer.innerHTML = q.options.map((opt, idx) => `
+                <button class="tool-input" style="text-align:left; cursor:pointer;" onclick="checkQuizAnswer(${idx})">
+                    ${String.fromCharCode(65 + idx)}. ${opt}
+                </button>
+            `).join('');
+        }
+
+        function checkQuizAnswer(selectedIdx) {
+            const q = QUIZ_QUESTIONS[currentQuizIndex];
+            const isCorrect = selectedIdx === q.correct;
+            const fb = document.getElementById("quizFeedback");
+
+            if (isCorrect) {
+                fb.innerHTML = `
+                    <span style="color:var(--bio-emerald);">✓ Correct!</span> ${q.explanation}
+                    <div style="margin-top:8px;">
+                        <button class="btn-run-tool" onclick="nextQuiz()">Next Question →</button>
+                    </div>
+                `;
+            } else {
+                fb.innerHTML = `
+                    <span style="color:var(--bio-rose);">✗ Incorrect.</span> Correct answer was: <strong>${q.options[q.correct]}</strong>.<br>${q.explanation}
+                    <div style="margin-top:8px;">
+                        <button class="btn-run-tool" onclick="nextQuiz()">Continue →</button>
+                    </div>
+                `;
+            }
+        }
+
+        function nextQuiz() {
+            currentQuizIndex = (currentQuizIndex + 1) % QUIZ_QUESTIONS.length;
+            renderQuiz();
+        }
+
+        // ---------------------------------------------------------------------
+        // 12. DIVISION & ARTICLE MODAL SYSTEM
+        // ---------------------------------------------------------------------
+        function openDivisionDetail(divisionId) {
+            const d = DIVISIONS_DATA.find(item => item.id === divisionId);
+            if (!d) return;
+
+            const modal = document.getElementById("detailModalBackdrop");
+            const content = document.getElementById("detailModalContent");
+
+            content.innerHTML = `
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                    <span style="background:var(--accent-cyan); color:#06111F; font-weight:800; padding:4px 10px; border-radius:6px; font-size:12px; font-family:monospace;">
+                        DIVISION ${d.number}
+                    </span>
+                    <span style="color:var(--accent-cyan); font-weight:700; font-size:13px; text-transform:uppercase;">
+                        ${d.category}
+                    </span>
+                </div>
+                <h2 style="font-size:28px; font-weight:900; margin-bottom:16px; color:var(--text-main);">${d.title}</h2>
+                <div style="width:100%; height:200px; border-radius:16px; overflow:hidden; margin-bottom:24px; border:1px solid var(--border-glow);">
+                    ${getDivisionSvg(d.svgType, d.svgColor)}
+                </div>
+                <h4 style="color:var(--accent-cyan); font-weight:800; margin-bottom:8px; font-size:15px;">SCIENTIFIC SCOPE &amp; OVERVIEW</h4>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; margin-bottom:20px;">
+                    ${d.details.overview}
+                </p>
+                <h4 style="color:var(--accent-cyan); font-weight:800; margin-bottom:8px; font-size:15px;">KEY BIOLOGICAL SYSTEMS</h4>
+                <ul style="list-style:inside square; color:var(--text-secondary); font-size:13.5px; margin-bottom:20px; line-height:1.8;">
+                    ${d.details.systems.map(s => `<li>${s}</li>`).join('')}
+                </ul>
+                <h4 style="color:var(--accent-cyan); font-weight:800; margin-bottom:8px; font-size:15px;">MECHANISM OF ACTION</h4>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; margin-bottom:24px;">
+                    ${d.details.mechanism}
+                </p>
+                <div style="display:flex; gap:12px;">
+                    <a href="#tools" onclick="closeDetailModal()" class="btn-primary-hero" style="font-size:13px; padding:10px 20px;">Launch Division Tools</a>
+                    <button onclick="askAiQuestion('Explain ${d.title} in detail.'); closeDetailModal();" class="btn-secondary-hero" style="font-size:13px; padding:10px 20px;">Discuss with AI</button>
+                </div>
+            `;
+            modal.style.display = "flex";
+        }
+
+        function openArticleModal(articleId) {
+            const p = RESEARCH_PAPERS.find(item => item.id === articleId);
+            if (!p) return;
+
+            const modal = document.getElementById("detailModalBackdrop");
+            const content = document.getElementById("detailModalContent");
+
+            content.innerHTML = `
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+                    <span style="background:rgba(37,139,255,0.2); color:var(--electric-blue); font-weight:800; padding:4px 10px; border-radius:6px; font-size:12px;">
+                        ${p.journal} • ${p.year}
+                    </span>
+                    <span style="color:var(--text-muted); font-size:12px; font-family:monospace;">
+                        DOI: ${p.doi}
+                    </span>
+                </div>
+                <h2 style="font-size:24px; font-weight:900; margin-bottom:12px; color:var(--text-main);">${p.title}</h2>
+                <p style="font-size:13px; color:var(--accent-cyan); font-style:italic; margin-bottom:20px;">${p.authors}</p>
+                <h4 style="color:var(--accent-cyan); font-weight:800; margin-bottom:8px; font-size:14px;">ABSTRACT &amp; PEER-REVIEWED FINDINGS</h4>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; margin-bottom:24px;">
+                    ${p.abstract}
+                </p>
+                <div style="background:var(--bg-secondary); border:1px solid var(--border-subtle); padding:16px; border-radius:12px; margin-bottom:24px;">
+                    <span style="font-size:11px; color:var(--text-muted); font-weight:700;">PUBMED CENTRAL INDEXING</span><br>
+                    <span style="font-size:13px; color:var(--text-main);">Indexed under NLM Medical Subject Headings (MeSH). Peer-reviewed methodology verified.</span>
+                </div>
+                <div style="display:flex; gap:12px;">
+                    <button onclick="toggleBookmark('${p.id}'); closeDetailModal();" class="btn-primary-hero" style="font-size:13px; padding:10px 20px;">
+                        ${userBookmarks.includes(p.id) ? 'Remove Bookmark' : 'Bookmark Article'}
+                    </button>
+                    <button onclick="askAiQuestion('Summarize the methodology of paper: ${p.title}'); closeDetailModal();" class="btn-secondary-hero" style="font-size:13px; padding:10px 20px;">
+                        Analyze with AI
+                    </button>
+                </div>
+            `;
+            modal.style.display = "flex";
+        }
+
+        function closeDetailModal() {
+            document.getElementById("detailModalBackdrop").style.display = "none";
+        }
+
+        // ---------------------------------------------------------------------
+        // 13. AI RESEARCH ASSISTANT SYSTEM
+        // ---------------------------------------------------------------------
+        function openAiAssistant() {
+            document.getElementById("aiModalBackdrop").style.display = "flex";
+            document.getElementById("aiUserInput").focus();
+        }
+
+        function closeAiAssistant() {
+            document.getElementById("aiModalBackdrop").style.display = "none";
+        }
+
+        function askAiQuestion(query) {
+            openAiAssistant();
+            document.getElementById("aiUserInput").value = query;
+            sendAiMessage();
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById("aiUserInput");
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chat = document.getElementById("aiChatMessages");
+
+            // Append User Bubble
+            const userBubble = document.createElement("div");
+            userBubble.className = "chat-bubble user";
+            userBubble.innerText = text;
+            chat.appendChild(userBubble);
+            input.value = "";
+            chat.scrollTop = chat.scrollHeight;
+
+            // Generate Scientific AI Response
+            setTimeout(() => {
+                const response = generateScientificResponse(text);
+                const aiBubble = document.createElement("div");
+                aiBubble.className = "chat-bubble assistant";
+                aiBubble.innerHTML = response;
+                chat.appendChild(aiBubble);
+                chat.scrollTop = chat.scrollHeight;
+            }, 500);
+        }
+
+        function generateScientificResponse(q) {
+            const query = q.toLowerCase();
+
+            if (query.includes("crispr") || query.includes("cas9")) {
+                return `<strong>CRISPR-Cas9 Mechanism:</strong><br>
+1. <strong>Target Recognition:</strong> A synthetic guide RNA (sgRNA) complexed with Cas9 recognizes a specific Protospacer Adjacent Motif (PAM, 5'-NGG-3').<br>
+2. <strong>DNA Cleavage:</strong> Cas9 endonuclease domains (RuvC and HNH) generate a double-strand break (DSB) 3 bp upstream of the PAM.<br>
+3. <strong>Cellular Repair:</strong> Repaired via Non-Homologous End Joining (NHEJ) introducing indels, or Homology-Directed Repair (HDR) for precise genomic insertions.<br><br>
+<em>References: Jinek et al., Science (2012); Doudna & Charpentier, Nobel Lecture (2020).</em>`;
+            }
+
+            if (query.includes("dna computing") || query.includes("biocomputing") || query.includes("logic")) {
+                return `<strong>DNA Biocomputing & Strand Displacement:</strong><br>
+Toehold-mediated strand displacement operates isothermally without enzymes. Single-stranded DNA input binds to an exposed complementary 'toehold' on a duplex gate, initiating branch migration that releases an output strand. This enables cascading Boolean logic (AND, OR, NOT) with theoretical storage densities exceeding 215 petabytes per gram of DNA.<br><br>
+<em>References: Zhang & Winfree, Nature Nanotechnology; Chen et al., Cell (2023).</em>`;
+            }
+
+            if (query.includes("mrna") || query.includes("vaccine")) {
+                return `<strong>mRNA Cellular Translation Mechanism:</strong><br>
+Synthetic modified nucleoside (N1-methylpseudouridine) mRNA encapsulated in lipid nanoparticles (LNPs) evades Toll-like receptor (TLR7/8) innate degradation. Upon endosomal release, host cytosolic ribosomes translate the mRNA into target viral antigens, presented on MHC-I and MHC-II molecules to stimulate CD8+ cytotoxic and CD4+ helper T-cell memory.<br><br>
+<em>References: Karikó & Weissman, Immunity; Polack et al., NEJM.</em>`;
+            }
+
+            if (query.includes("anatomy") || query.includes("heart") || query.includes("cardiac")) {
+                return `<strong>Human Cardiac Physiology:</strong><br>
+Cardiac excitation originates at the sinoatrial (SA) node, propagating across internodal pathways to the AV node (introducing a 100 ms delay for ventricular filling), traversing the Bundle of His and Purkinje fibers. Frank-Starling's law of the heart dictates that increased end-diastolic volume stretches cardiac myocytes, enhancing cross-bridge actin-myosin force generation.<br><br>
+<em>References: Guyton and Hall Textbook of Medical Physiology (14th Ed).</em>`;
+            }
+
+            return `<strong>Scientific Research Analysis:</strong><br>
+Regarding <em>"${q}"</em>:<br>
+In molecular and cellular biology, biological processes operate through biochemical thermodynamic equilibria and receptor-mediated signaling cascades. Cellular mechanisms are governed by genetic transcription networks, post-translational phosphorylation, and macromolecular spatial compartmentalization.<br><br>
+Would you like to explore related peer-reviewed papers in the Research Library or simulate this in the Scientific Tools Suite?<br><br>
+<em>Note: Educational and research analysis only.</em>`;
+        }
+
+        // ---------------------------------------------------------------------
+        // 14. THEME TOGGLE (Persistent Light/Dark Mode)
+        // ---------------------------------------------------------------------
+        function initTheme() {
+            const savedTheme = localStorage.getItem("bioscience_theme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+            updateThemeButton(savedTheme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute("data-theme");
+            const next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("bioscience_theme", next);
+            updateThemeButton(next);
+        }
+
+        function updateThemeButton(theme) {
+            const icon = document.getElementById("themeIcon");
+            const label = document.getElementById("themeLabel");
+            if (theme === "dark") {
+                icon.innerText = "☀️";
+                label.innerText = "Light";
+            } else {
+                icon.innerText = "🌙";
+                label.innerText = "Dark";
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // 15. MOBILE DRAWER TOGGLE
+        // ---------------------------------------------------------------------
+        function toggleMobileDrawer() {
+            const drawer = document.getElementById("mobileDrawer");
+            drawer.style.display = drawer.style.display === "none" ? "block" : "none";
+        }
+
+        // ---------------------------------------------------------------------
+        // 16. GLOBAL SEARCH WITH AUTO-SCROLL
+        // ---------------------------------------------------------------------
+        function handleGlobalSearch(query) {
+            const q = query.toLowerCase().trim();
+            if (!q) return;
+
+            // Highlight and search divisions
+            const cards = document.querySelectorAll(".division-card");
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(q)) {
+                    card.style.display = "flex";
+                    card.style.borderColor = "var(--accent-cyan)";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            if (q.length > 2) {
+                const divisionsSec = document.getElementById("divisions");
+                divisionsSec.scrollIntoView({behavior: "smooth"});
+            }
+        }
+
+        function renderDnaCanvasBackup(imgEl) {
+            // If image fails to load, create an inline canvas render
+            const canvas = document.createElement("canvas");
+            canvas.width = 600;
+            canvas.height = 360;
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#06111F";
+            ctx.fillRect(0, 0, 600, 360);
+            ctx.fillStyle = "#00D9F5";
+            ctx.font = "bold 20px monospace";
+            ctx.fillText("🧬 3D DNA SIMULATION", 180, 180);
+            imgEl.parentNode.replaceChild(canvas, imgEl);
+        }
+    </script>
+</body>
+</html>

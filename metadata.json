@@ -1,0 +1,7 @@
+{
+  "name": "BioScience Universe",
+  "description": "Explore the Science of Life: A futuristic scientific knowledge, biotechnology, genetics, and biocomputing research platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
